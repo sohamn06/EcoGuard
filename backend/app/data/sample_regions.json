@@ -1,0 +1,154 @@
+[
+  {
+    "id": "aravalli_ridge",
+    "name": "Aravalli Biodiversity & Mining Corridor",
+    "country": "India",
+    "state": "Haryana / Delhi NCR",
+    "lat": 28.3842,
+    "lng": 77.0528,
+    "zoom": 12,
+    "bbox": [76.95, 28.30, 77.15, 28.45],
+    "ecosystem_type": "Tropical Dry Deciduous & Scrub Forest",
+    "area_sqkm": 240.5,
+    "primary_threats": [
+      "Quarrying & Mining Encroachment",
+      "Urban Infrastructure Expansion",
+      "Severe Groundwater Table Depletion",
+      "Invasive Prosopis Juliflora Spread"
+    ],
+    "description": "Crucial ecological barrier against Thar Desert expansion into the Indo-Gangetic plains. Experiencing severe pressure from illegal earth excavation, road widening, and unchecked real-estate development.",
+    "geojson": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.98, 28.32],
+            [77.12, 28.31],
+            [77.14, 28.42],
+            [77.02, 28.44],
+            [76.98, 28.32]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Aravalli Protected Buffer",
+        "zone": "Critical Ecological Zone"
+      }
+    }
+  },
+  {
+    "id": "western_ghats",
+    "name": "Silent Valley Buffer Zone",
+    "country": "India",
+    "state": "Kerala / Tamil Nadu Border",
+    "lat": 11.0825,
+    "lng": 76.5412,
+    "zoom": 12,
+    "bbox": [76.45, 11.00, 76.65, 11.16],
+    "ecosystem_type": "Tropical Wet Evergreen Rainforest & Shola",
+    "area_sqkm": 190.2,
+    "primary_threats": [
+      "Linear Infrastructure & Highway Expansion",
+      "Monoculture Plantation Encroachment",
+      "Extreme Rainfall & Landslide Susceptibility",
+      "Riparian Buffer Degradation"
+    ],
+    "description": "UNESCO World Heritage biodiversity hotspot harboring endemic fauna like the Lion-tailed Macaque. Recent slope cutting and resort construction have fragmented contiguous canopy buffers.",
+    "geojson": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [76.47, 11.02],
+            [76.62, 11.01],
+            [76.63, 11.14],
+            [76.49, 11.15],
+            [76.47, 11.02]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Silent Valley Buffer Polygon",
+        "zone": "Eco-Sensitive Zone I"
+      }
+    }
+  },
+  {
+    "id": "sundarbans_delta",
+    "name": "Sundarbans Biosphere Fringe",
+    "country": "India",
+    "state": "West Bengal",
+    "lat": 21.9431,
+    "lng": 88.8523,
+    "zoom": 11,
+    "bbox": [88.70, 21.80, 89.00, 22.05],
+    "ecosystem_type": "Tidal Halophytic Mangrove Forest",
+    "area_sqkm": 320.0,
+    "primary_threats": [
+      "Saline Water Intrusion",
+      "Embankment Erosion & Cyclone Impacts",
+      "Aquaculture Prawn Seed Over-harvesting",
+      "Freshwater Inflow Reduction"
+    ],
+    "description": "World's largest contiguous mangrove delta system protecting the Bengal basin from severe storm surges. Confronted with tidal bank erosion, brackish shifts, and human-wildlife edge conflicts.",
+    "geojson": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [88.75, 21.82],
+            [88.98, 21.83],
+            [88.96, 22.02],
+            [88.72, 22.00],
+            [88.75, 21.82]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Sundarbans Coastal Belt",
+        "zone": "Ramsar Wetland Site"
+      }
+    }
+  },
+  {
+    "id": "kaziranga_corridor",
+    "name": "Kaziranga Karbi-Anglong Ecological Corridor",
+    "country": "India",
+    "state": "Assam",
+    "lat": 26.5821,
+    "lng": 93.3512,
+    "zoom": 12,
+    "bbox": [93.22, 26.50, 93.48, 26.68],
+    "ecosystem_type": "Alluvial Grassland & Semi-Evergreen Forest",
+    "area_sqkm": 175.8,
+    "primary_threats": [
+      "National Highway 37 Animal Migration Barriers",
+      "Annual Monsoon Flood Siltation",
+      "Tea Estate Buffer Conversion"
+    ],
+    "description": "Crucial highlands animal corridor between Kaziranga floodplains and Karbi Anglong hills. Recent community agroforestry and eco-bridge enforcement have demonstrated positive canopy recovery.",
+    "geojson": {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [93.25, 26.52],
+            [93.45, 26.51],
+            [93.46, 26.66],
+            [93.24, 26.65],
+            [93.25, 26.52]
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Animal Corridor Protection Zone",
+        "zone": "Regeneration & Wildlife Passage"
+      }
+    }
+  }
+]
+

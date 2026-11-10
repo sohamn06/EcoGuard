@@ -1,0 +1,185 @@
+{
+  "nodes": [
+    {
+      "id": "construction_pressure",
+      "label": "Infrastructure & Excavation",
+      "category": "stressor",
+      "description": "Earthmoving, road widening, quarrying and linear infrastructure encroachment within buffer zones.",
+      "metric": "Active Disturbance Footprint (ha)",
+      "mitigation_lever": "Mandatory 5km Buffer Zone & Construction Bans",
+      "position": {
+        "x": 50,
+        "y": 80
+      }
+    },
+    {
+      "id": "vegetation_disturbance",
+      "label": "Vegetation Canopy Loss",
+      "category": "biological",
+      "description": "Satellite-detected NDVI drop, clear-felling, scrub clearance, and loss of contiguous tree crown.",
+      "metric": "Mean dNDVI Canopy Deficit",
+      "mitigation_lever": "Native Species Afforestation & Assisted Natural Regeneration",
+      "position": {
+        "x": 320,
+        "y": 80
+      }
+    },
+    {
+      "id": "soil_degradation",
+      "label": "Soil Degradation & Runoff",
+      "category": "abiotic",
+      "description": "Loss of topsoil organic matter, soil compaction, gully formation, and accelerated sediment runoff.",
+      "metric": "Estimated Soil Loss Rate (t/ha/yr)",
+      "mitigation_lever": "Contour Bunding, Vetiver Grass Planting & Check-Dams",
+      "position": {
+        "x": 590,
+        "y": 80
+      }
+    },
+    {
+      "id": "water_stress",
+      "label": "Groundwater & Hydrological Stress",
+      "category": "abiotic",
+      "description": "Depleted aquifer recharge, drying of seasonal streams, increased runoff coefficient, and soil moisture deficit.",
+      "metric": "Recharge Deficit (% historical mean)",
+      "mitigation_lever": "Percolation Ponds, Rainwater Harvesting & Wetland Conservation",
+      "position": {
+        "x": 320,
+        "y": 260
+      }
+    },
+    {
+      "id": "microclimate_shift",
+      "label": "Microclimate & Surface Temp Rise",
+      "category": "abiotic",
+      "description": "Localized land surface temperature (LST) increase, elevated evapotranspiration, and humidity drop.",
+      "metric": "LST Thermal Anomaly (°C)",
+      "mitigation_lever": "Shade Canopy Restoration & Urban Forestry Green Belts",
+      "position": {
+        "x": 50,
+        "y": 260
+      }
+    },
+    {
+      "id": "habitat_fragmentation",
+      "label": "Wildlife Corridor Fragmentation",
+      "category": "biological",
+      "description": "Disruption of contiguous migratory pathways, edge effects, and genetic isolation of forest fauna.",
+      "metric": "Corridor Contiguity Index (0-1)",
+      "mitigation_lever": "Canopy Eco-Bridges & Protected Passage Corridors",
+      "position": {
+        "x": 590,
+        "y": 260
+      }
+    },
+    {
+      "id": "biodiversity_impact",
+      "label": "Biodiversity Collapse Risk",
+      "category": "outcome",
+      "description": "Decline in indicator species, avian nesting failures, and disruption of food-web trophic cascades.",
+      "metric": "Ecosystem Health Integrity Score",
+      "mitigation_lever": "Comprehensive Multi-Tier Ecological Restoration Strategy",
+      "position": {
+        "x": 860,
+        "y": 170
+      }
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_const_veg",
+      "source": "construction_pressure",
+      "target": "vegetation_disturbance",
+      "label": "Direct canopy removal & bulldozing",
+      "strength": 0.85,
+      "relationship_type": "direct_stress"
+    },
+    {
+      "id": "e_const_soil",
+      "source": "construction_pressure",
+      "target": "soil_degradation",
+      "label": "Soil compaction & slope cutting",
+      "strength": 0.75,
+      "relationship_type": "physical_alteration"
+    },
+    {
+      "id": "e_veg_soil",
+      "source": "vegetation_disturbance",
+      "target": "soil_degradation",
+      "label": "Loss of root binding & canopy interception",
+      "strength": 0.80,
+      "relationship_type": "loss_of_protection"
+    },
+    {
+      "id": "e_veg_micro",
+      "source": "vegetation_disturbance",
+      "target": "microclimate_shift",
+      "label": "Loss of evaporative cooling",
+      "strength": 0.70,
+      "relationship_type": "thermal_albedo_shift"
+    },
+    {
+      "id": "e_soil_water",
+      "source": "soil_degradation",
+      "target": "water_stress",
+      "label": "Reduced infiltration & aquifer recharge",
+      "strength": 0.75,
+      "relationship_type": "hydrological_barrier"
+    },
+    {
+      "id": "e_veg_frag",
+      "source": "vegetation_disturbance",
+      "target": "habitat_fragmentation",
+      "label": "Canopy bifurcation & gap creation",
+      "strength": 0.85,
+      "relationship_type": "spatial_disconnect"
+    },
+    {
+      "id": "e_water_bio",
+      "source": "water_stress",
+      "target": "biodiversity_impact",
+      "label": "Desiccation of waterholes & riparian fauna",
+      "strength": 0.70,
+      "relationship_type": "trophic_stress"
+    },
+    {
+      "id": "e_frag_bio",
+      "source": "habitat_fragmentation",
+      "target": "biodiversity_impact",
+      "label": "Species isolation & poaching vulnerability",
+      "strength": 0.90,
+      "relationship_type": "cascading_extinction"
+    },
+    {
+      "id": "e_micro_bio",
+      "source": "microclimate_shift",
+      "target": "biodiversity_impact",
+      "label": "Thermal tolerance breach in amphibians/plants",
+      "strength": 0.60,
+      "relationship_type": "physiological_stress"
+    }
+  ],
+  "propagation_weights": {
+    "soil_degradation": {
+      "construction_pressure": 0.35,
+      "vegetation_disturbance": 0.65
+    },
+    "microclimate_shift": {
+      "vegetation_disturbance": 0.75,
+      "construction_pressure": 0.25
+    },
+    "water_stress": {
+      "soil_degradation": 0.55,
+      "microclimate_shift": 0.45
+    },
+    "habitat_fragmentation": {
+      "vegetation_disturbance": 0.70,
+      "construction_pressure": 0.30
+    },
+    "biodiversity_impact": {
+      "habitat_fragmentation": 0.45,
+      "water_stress": 0.35,
+      "soil_degradation": 0.20
+    }
+  }
+}
