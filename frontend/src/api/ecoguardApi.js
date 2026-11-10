@@ -3,20 +3,21 @@ import api from './client';
 export const ecoguardApi = {
   // System & Overview
   getHealth: () => api.get('/health').then(res => res.data),
-  getOverview: () => api.get('/overview').then(res => res.data),
-  
+  getOverview: (regionId = null) =>
+    api.get('/overview', { params: regionId ? { region_id: regionId } : {} }).then(res => res.data),
+
   // Regions
   getRegions: () => api.get('/regions').then(res => res.data),
   getRegionDetail: (id) => api.get(`/regions/${id}`).then(res => res.data),
 
   // Environmental Monitoring
-  getObservations: (regionId) => 
+  getObservations: (regionId) =>
     api.get('/monitoring/observations', { params: { region_id: regionId } }).then(res => res.data),
-  
-  getNdvi: (regionId, slot = 't2') => 
+
+  getNdvi: (regionId, slot = 't2') =>
     api.get('/monitoring/ndvi', { params: { region_id: regionId, slot } }).then(res => res.data),
-  
-  getChangeDetection: (regionId) => 
+
+  getChangeDetection: (regionId) =>
     api.get('/monitoring/change-detection', { params: { region_id: regionId } }).then(res => res.data),
 
   // Risk Engine
@@ -28,11 +29,11 @@ export const ecoguardApi = {
   },
 
   // Ecological Dependency Graph
-  getEcologicalGraph: (regionId) => 
+  getEcologicalGraph: (regionId) =>
     api.get('/graph', { params: { region_id: regionId } }).then(res => res.data),
 
   // Intervention Simulator
-  runSimulation: (regionId, interventions, timeframeYears = 5) => 
+  runSimulation: (regionId, interventions, timeframeYears = 5) =>
     api.post('/simulations/run', {
       region_id: regionId,
       interventions,
@@ -47,10 +48,10 @@ export const ecoguardApi = {
     return api.get('/alerts', { params }).then(res => res.data);
   },
 
-  updateAlertStatus: (alertId, status) => 
+  updateAlertStatus: (alertId, status) =>
     api.patch(`/alerts/${alertId}`, { status }).then(res => res.data),
 
-  exportReportUrl: (regionId, format = 'csv') => 
+  exportReportUrl: (regionId, format = 'csv') =>
     `/api/reports/export?region_id=${encodeURIComponent(regionId)}&export_format=${encodeURIComponent(format)}`,
 
   // Data Sources & Transparency

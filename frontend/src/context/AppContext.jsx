@@ -7,6 +7,7 @@ export const AppProvider = ({ children }) => {
   const [regions, setRegions] = useState([]);
   const [selectedRegionId, setSelectedRegionId] = useState('aravalli_ridge');
   const [selectedSlot, setSelectedSlot] = useState('t2'); // 't1' or 't2'
+  const [observationsMeta, setObservationsMeta] = useState(null);
   const [activeAlertsCount, setActiveAlertsCount] = useState(0);
   const [isAlertDrawerOpen, setIsAlertDrawerOpen] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -36,6 +37,19 @@ export const AppProvider = ({ children }) => {
     fetchInitialData();
   }, []);
 
+  useEffect(() => {
+    if (!selectedRegionId) return;
+    let active = true;
+    ecoguardApi.getObservations(selectedRegionId)
+      .then((data) => {
+        if (active) setObservationsMeta(data);
+      })
+      .catch((err) => {
+        console.error('Observation metadata error:', err);
+      });
+    return () => { active = false; };
+  }, [selectedRegionId]);
+
   const currentRegion = regions.find(r => r.id === selectedRegionId) || regions[0] || null;
 
   return (
@@ -46,6 +60,7 @@ export const AppProvider = ({ children }) => {
         setSelectedRegionId,
         selectedSlot,
         setSelectedSlot,
+        observationsMeta,
         currentRegion,
         activeAlertsCount,
         setActiveAlertsCount,
@@ -61,4 +76,3 @@ export const AppProvider = ({ children }) => {
 };
 
 export const useApp = () => useContext(AppContext);
-
