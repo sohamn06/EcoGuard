@@ -1,12 +1,9 @@
 import React from 'react';
 import {
   MapPin,
-  Calendar,
   Bell,
-  RefreshCw,
-  Activity,
-  Layers,
-  ChevronDown
+  ChevronDown,
+  Database
 } from 'lucide-react';
 import { useApp } from '../../context/AppContext';
 
@@ -17,10 +14,17 @@ export const TopNavbar = () => {
     setSelectedRegionId,
     selectedSlot,
     setSelectedSlot,
+    observationsMeta,
     currentRegion,
     activeAlertsCount,
     setIsAlertDrawerOpen
   } = useApp();
+
+  const t1Date = observationsMeta?.observations?.t1?.date;
+  const t2Date = observationsMeta?.observations?.t2?.date;
+  const activeObs = selectedSlot === 't1'
+    ? observationsMeta?.observations?.t1
+    : observationsMeta?.observations?.t2;
 
   return (
     <header className="h-16 bg-white border-b border-slate-200/90 px-6 flex items-center justify-between z-20 shadow-xs">
@@ -56,40 +60,39 @@ export const TopNavbar = () => {
           </div>
         )}
 
-        {/* Observation Period Toggle */}
+        {/* Observation Period Toggle with Backend Dates */}
         <div className="hidden sm:flex items-center space-x-1 bg-slate-100 p-0.5 rounded-md border border-slate-200 text-xs font-medium">
           <button
             onClick={() => setSelectedSlot('t1')}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              selectedSlot === 't1'
+            className={`px-2.5 py-1 rounded transition-colors ${selectedSlot === 't1'
                 ? 'bg-white text-slate-900 shadow-xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
-            T1 (Baseline)
+            T1 {t1Date ? `(${t1Date})` : '(Baseline)'}
           </button>
           <button
             onClick={() => setSelectedSlot('t2')}
-            className={`px-2.5 py-1 rounded transition-colors ${
-              selectedSlot === 't2'
+            className={`px-2.5 py-1 rounded transition-colors ${selectedSlot === 't2'
                 ? 'bg-emerald-600 text-white shadow-xs font-semibold'
                 : 'text-slate-600 hover:text-slate-900'
-            }`}
+              }`}
           >
-            T2 (Current)
+            T2 {t2Date ? `(${t2Date})` : '(Current)'}
           </button>
         </div>
       </div>
 
-      {/* Right: Data Freshness, Alerts, Status */}
+      {/* Right: Observation Timestamp & Data Mode, Alerts, Status */}
       <div className="flex items-center space-x-3">
-        {/* Data Freshness Indicator */}
+        {/* Data Freshness & Source Attribution Indicator */}
         <div className="hidden md:flex items-center space-x-2 text-xs bg-slate-50 border border-slate-200 rounded-md px-3 py-1 text-slate-600">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span className="font-mono text-[11px]">Telemetry Freshness: 98.4%</span>
+            <Database className="w-3.5 h-3.5 text-emerald-600" />
+            <span className="font-mono text-[11px]">
+              {activeObs
+                ? `Observed: ${activeObs.date} • Sample S2 L2A`
+                : 'Connecting to pipeline...'}
+            </span>
         </div>
 
         {/* Alerts Bell Button */}
@@ -100,24 +103,23 @@ export const TopNavbar = () => {
         >
           <Bell className="w-4 h-4" />
           {activeAlertsCount > 0 && (
-            <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[10px] font-bold bg-rose-600 text-white rounded-full animate-bounce">
-              {activeAlertsCount}
-            </span>
+              <span className="absolute -top-1 -right-1 px-1.5 py-0.2 text-[10px] font-bold bg-rose-600 text-white rounded-full">
+                {activeAlertsCount}
+              </span>
           )}
-        </button>
+            </button>
 
         {/* User / Org Avatar */}
-        <div className="flex items-center space-x-2 pl-2 border-l border-slate-200">
-          <div className="w-8 h-8 rounded-full bg-slate-800 text-emerald-400 flex items-center justify-center font-bold text-xs ring-2 ring-emerald-500/20">
-            EG
+          <div className="flex items-center space-x-2 pl-2 border-l border-slate-200">
+            <div className="w-8 h-8 rounded-full bg-slate-800 text-emerald-400 flex items-center justify-center font-bold text-xs ring-2 ring-emerald-500/20">
+              EG
+            </div>
+            <div className="hidden xl:block text-left">
+              <div className="text-xs font-semibold text-slate-800">Gov. Field Command</div>
+              <div className="text-[10px] text-slate-400 font-mono">Geospatial Unit</div>
+            </div>
           </div>
-          <div className="hidden xl:block text-left">
-            <div className="text-xs font-semibold text-slate-800">Gov. Field Command</div>
-            <div className="text-[10px] text-slate-400 font-mono">Geospatial Unit</div>
-          </div>
-        </div>
       </div>
     </header>
   );
 };
-
